@@ -1,0 +1,19 @@
+INFO [04-28|03:06:21.032] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [04-28|03:06:21.054] Starting peer-to-peer node               instance=Geth/v1.8.27-stable-4bcc0a37/linux-amd64/go1.10.4
+INFO [04-28|03:06:21.055] Allocated cache and file handles         database="/mnt/c/Users/Justin Or/uni/accenture_hackathon19/network/node1/geth/chaindata" cache=512 handles=32768
+INFO [04-28|03:06:22.727] Initialised chain configuration          config="{ChainID: 1515 Homestead: 1 DAO: <nil> DAOSupport: false EIP150: 2 EIP155: 3 EIP158: 3 Byzantium: 4 Constantinople: 5  ConstantinopleFix: <nil> Engine: ethash}"
+INFO [04-28|03:06:22.727] Disk storage enabled for ethash caches   dir="/mnt/c/Users/Justin Or/uni/accenture_hackathon19/network/node1/geth/ethash" count=3
+INFO [04-28|03:06:22.727] Disk storage enabled for ethash DAGs     dir=/home/xpirep/.ethash                                                         count=2
+INFO [04-28|03:06:22.728] Initialising Ethereum protocol           versions="[63 62]" network=1114
+INFO [04-28|03:06:23.878] Loaded most recent local header          number=0 hash=504b2e…ebfec3 td=524288 age=22m45s
+INFO [04-28|03:06:25.210] Loaded most recent local full block      number=0 hash=504b2e…ebfec3 td=524288 age=22m47s
+INFO [04-28|03:06:25.211] Loaded most recent local fast block      number=0 hash=504b2e…ebfec3 td=524288 age=22m47s
+INFO [04-28|03:06:25.302] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [04-28|03:06:34.108] New local node record                    seq=1 id=7f981a1b95a9f2eb ip=127.0.0.1 udp=30303 tcp=30303
+INFO [04-28|03:06:34.111] Started P2P networking                   self=enode://83a386de5a36806757bbbb1b6b74710bf8b53a0884786859b7d752f9b56d7260f8162af8e64bc9fe832404a0453ea5a4989720614a321f67ebbd7cc55bcc9056@127.0.0.1:30303
+INFO [04-28|03:06:34.137] Blockchain manager stopped 
+INFO [04-28|03:06:34.138] Stopping Ethereum protocol 
+INFO [04-28|03:06:34.138] Ethereum protocol stopped 
+INFO [04-28|03:06:34.138] Transaction pool stopped 
+INFO [04-28|03:06:34.149] Database closed                          database="/mnt/c/Users/Justin Or/uni/accenture_hackathon19/network/node1/geth/chaindata"
+Fatal: Error starting protocol stack: listen unix /mnt/c/Users/Justin Or/uni/accenture_hackathon19/network/node1/geth.ipc: bind: invalid argument
