@@ -1,7 +1,8 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/components/my-app.js",
+  "shell": "src/shop-app.js",
   "sources": [
+    "data/**/*",
     "images/**/*"
   ],
   "extraDependencies": [
@@ -65,5 +66,10 @@
     }
   ],
   "moduleResolution": "node",
-  "npm": true
+  "npm": true,
+  "lint": {
+    "rules": [
+      "polymer-3"
+    ]
+  }
 }

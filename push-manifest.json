@@ -1,11 +1,6 @@
 {
   "/": {
-    "src/components/my-app.js": {
-      "crossorigin": "anonymous",
-      "type": "script",
-      "weight": 1
-    },
-    "src/components/my-view1.js": {
+    "src/shop-app.js": {
       "crossorigin": "anonymous",
       "type": "script",
       "weight": 1
@@ -15,29 +10,13 @@
       "weight": 1
     }
   },
-  "/view1": {
-    "src/components/my-app.js": {
+  "/list/.*": {
+    "src/shop-app.js": {
       "crossorigin": "anonymous",
       "type": "script",
       "weight": 1
     },
-    "src/components/my-view1.js": {
-      "crossorigin": "anonymous",
-      "type": "script",
-      "weight": 1
-    },
-    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
-      "type": "script",
-      "weight": 1
-    }
-  },
-  "/view2": {
-    "src/components/my-app.js": {
-      "crossorigin": "anonymous",
-      "type": "script",
-      "weight": 1
-    },
-    "src/components/my-view2.js": {
+    "src/shop-list.js": {
       "crossorigin": "anonymous",
       "type": "script",
       "weight": 1
@@ -47,13 +26,45 @@
       "weight": 1
     }
   },
-  "/view3": {
-    "src/components/my-app.js": {
+  "/detail/.*": {
+    "src/shop-app.js": {
       "crossorigin": "anonymous",
       "type": "script",
       "weight": 1
     },
-    "src/components/my-view3.js": {
+    "src/shop-detail.js": {
+      "crossorigin": "anonymous",
+      "type": "script",
+      "weight": 1
+    },
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
+      "type": "script",
+      "weight": 1
+    }
+  },
+  "/cart": {
+    "src/shop-app.js": {
+      "crossorigin": "anonymous",
+      "type": "script",
+      "weight": 1
+    },
+    "src/shop-cart.js": {
+      "crossorigin": "anonymous",
+      "type": "script",
+      "weight": 1
+    },
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
+      "type": "script",
+      "weight": 1
+    }
+  },
+  "/checkout": {
+    "src/shop-app.js": {
+      "crossorigin": "anonymous",
+      "type": "script",
+      "weight": 1
+    },
+    "src/shop-checkout.js": {
       "crossorigin": "anonymous",
       "type": "script",
       "weight": 1
