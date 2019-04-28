@@ -3,6 +3,7 @@ import json
 import sys
 import random
 import time
+from random import randrange
 
 
 # facebook apis
@@ -14,18 +15,21 @@ APP_PERMISSION = [
     "EAAGCdhMaQkwBAJjgnTKERAW4oCwyZCTpPsVphatekBt9jxqiY8Mb8vchHddC4wPrkgkon1b2cw7HqYT8RI7t7ZBAZAWXB2kefqTeZC2FxZBGrnr9JyZC5ZAEXolVPH2KEOShftlYxGRow93IGZCY3l42AaCHJyGeQbMp9PxFeyRwhaSh9q1uHi1zZB1wmlHhnDv9VSV0ZALNmFq8pZBxDmMRabC",
     "EAAGCdhMaQkwBAKqJmYu2cdFtWzt2sr7ZCb4YKKsUXomivWtijkyhjQ2ebQE4VWwo2yOCiqbIQ8MS2CXKaioZCrE6vKKTIarsBJzNIFVJr6C3CANR3VOOUxU2eswHnChSCukJVjkHeZBP8NH7yL2Pk6TetGA2byzJadTElVKPkTG2w1N3sUks2oz1Xi2Ins8ShgJwqAjb4Lz80sh8PcA"
 ]
-
+PAGE_TOKEN = "EAAGCdhMaQkwBAAFns84RdSQGmbd2uh4aP3xQPZAtLOZA3irggjMJzYrdDMSqyXx3NOZBJ6cozbTvbIZBZCyxDSpMByKvXkwZBGXkZAIcOGflPJQZCjSjkhqUqThCs8MOd3CYvWZB9zjZBrqR95YAQ83bOQrPGe80QjUbep8NaxGopecNZAj8ylOBcJLYT9B7ivlV1HTQpCPJuXm4gZDZD"
+PAGE_ID = 401414760443074
 # constants
 NODE = ["http://127.0.0.1:5000","http://127.0.0.1:5001","http://127.0.0.1:5002"]
 # CHA = ["http://127.0.0.1:6000", "http://127.0.0.1:6001"]
 # user ids in the blockchain
-USR = ["1qaz2wsx3edc", "2wsx3edc4rfv", "3edc4rfv5tgb"]
+USR = ["1qaz2wsx3edc", "2wsx3edc4rfv", "3edc4rfv5tgb", "bd74bd184f1c", "c909bb936ece"] #, "3932d25ea0fa"]
 CHR = ["4rfv5tgb6yhn"] #, "5tgb6yhn7ujm"]
+USRNAMES = ["AJ McLean", "Howie Dorough", "Nick Carter", "Kevin Richardson", "Brian Littrell"]
+CHARITYNAMES = ["ALS"]
 # parsing of blockchain into readible text
-user_str = ["Doing the ice bucket challenge! It was freezing cold, but it's for a good cause! Donate to ALS here, the money goes to a really great cause and even a little bit can be a big help! http://www.alsa.org. I dare you to beat my Donation of $%d!",
-            "I'm participating in the Ice bucket challenge (http://www.alsa.org)! Can you beat my donation of $%d?"]
+user_str = ["%s here doing the ice bucket challenge! It was freezing cold, but it's for a good cause! Donate to ALS here, the money goes to a really great cause and even a little bit can be a big help! http://www.alsa.org. I dare you to beat my Donation of $%d!",
+            "%s is participating in the Ice bucket challenge (http://www.alsa.org)! Can you beat their donation of $%d?"]
 user_val = [20,30,50]
-charity_str = ["We used $%d to %s!", "With $%d that all of you have donated, we can now %s!"]
+charity_str = ["ALS\nWe used $%d to %s!", "ALS\nWith $%d that all of you have donated, we can now %s!"]
 charity_val = ["buy lifesaving equipment for multiple families in need", "bring more funding to research in this area"]
 
 # generic get HTML
@@ -71,6 +75,13 @@ def txn(url, sender, recipient, amount, payload=""):
     data = r.json()
     return data
 
+# make a post to the FB page
+def fbPost(pageID,message):
+    DATA = {"message":str(message),"access token":PAGE_TOKEN}
+    r = post(HOST, "/" + str(pageID) + "/feed", DATA)
+    data = r.json()
+    return data
+
 # register nodes
 def register(url, nodes):
     DATA = {"nodes" : nodes}
@@ -91,13 +102,6 @@ def resolve(url):
 def decision(probability):
     return random.random() < probability
 
-# facebook api not really working, Dont know where to put the token
-def get_app_per(permissions):
-    PARAMS = {}
-    r = get(HOST, "/v3.2/" + APP_ID + "/accounts/test-users", PARAMS)
-    data = r.json()
-    return data
-
 
 if __name__ == "__main__":
 
@@ -110,13 +114,17 @@ if __name__ == "__main__":
         for node in NODE:
             mine(node)
             resolve(node)
+            postMsg = ""
             if decision(0.7):
                 # Donation
                 donation = random.randint(20,50)
                 data = random.choice(user_str)
-                txn(node, random.choice(USR), random.choice(CHR), donation, data % donation)
+                randIndex = randrange(len(USR))
+                txn(node, USR[randIndex], random.choice(CHR), donation, data % (USRNAMES[randIndex],donation))
                 mine(node)
                 chain(node)
+                postMsg = data % (USRNAMES[randIndex],donation)
+                # postMsg = "{} donated ${} to us. Thanks for the generosity {}!".format(USRNAMES[randIndex],donation,USRNAMES[randIndex])
             else:
                 # charity
                 charity = random.randint(40,100)
@@ -126,8 +134,9 @@ if __name__ == "__main__":
                 txn(node, random.choice(CHR), 0, charity, data)
                 mine(node)
                 chain(node)
+                postMsg = data
             # post to facebook
-
+            fbPost(PAGE_ID,postMsg)
             # sleep for simulation
             time.sleep(random.randint(20,60))
     # get_app_per()

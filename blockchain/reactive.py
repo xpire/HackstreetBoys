@@ -3,7 +3,7 @@ import json
 import sys
 import random
 import time
-from req.py import *
+from req import *
 
 if __name__ == "__main__":
 
@@ -14,13 +14,14 @@ if __name__ == "__main__":
     resolve(node)
 
     # Donation
-    donation = 5000 #TODO
-    data = "hello" #TODO
-    txn(node, random.choice(USR), random.choice(CHR), donation, data)
+    donation = 8070
+    data = "Congratulations AJ McLean, for donating ${} towards an amazing cause {}! Feel free to support the cause and more through this link: {}.".format(donation, "The ALS Ice Bucket Challenge",node)  #TODO
+    txn(node, "AJ McLean", CHR[0], donation, data)
     mine(node)
     chain(node)
     # post to facebook
-
+    fbPost(PAGE_ID,data)
     # sleep for simulation
-    time.sleep(random.randint(20,60))
+    # time.sleep(random.randint(20,60))
+    exit()
     # get_app_per()
